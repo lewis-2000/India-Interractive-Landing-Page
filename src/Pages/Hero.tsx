@@ -1,10 +1,12 @@
 import Navbar from "../components/Navs/LeftIconContent"
-import MapComponent from "../components/map/Map"
+// import MapComponent from "../components/map/Map"
+import RevisedMap from "../components/map/RevisedMap"
 const Hero = () => {
     return (
         <div className="bg-black">
             <Navbar />
-            <MapComponent />
+            {/* <MapComponent /> */}
+            <RevisedMap />
 
         </div>
     )
