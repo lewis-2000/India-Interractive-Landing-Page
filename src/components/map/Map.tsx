@@ -43,7 +43,7 @@ const MapComponent: React.FC = () => {
     const [infoVisible, setInfoVisible] = useState<boolean>(true);
 
     useEffect(() => {
-        fetch('/india.geojson')
+        fetch('/India-Interractive-Landing-Page/india.geojson')
             .then((response) => response.json())
             .then((data) => setData(data))
             .catch((error) => console.error('Error fetching GeoJSON:', error));
