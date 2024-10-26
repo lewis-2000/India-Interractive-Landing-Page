@@ -2,39 +2,41 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, Tooltip, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import StateInfo from '../States/StateInfo';
+// import StateInfo from '../States/StateInfo';
 import L from 'leaflet';
 
 // Define a color mapping for the states
 const stateColors: { [key: string]: string } = {
     "Andhra Pradesh": "#FF5733",
-    "Arunachal Pradesh": "#33FF57",
-    "Assam": "#3357FF",
-    "Bihar": "#F4D03F",
-    "Chhattisgarh": "#9B59B6",
+    "Arunachal Pradesh": "#e7f900",
+    "Assam": "#fe9e0c",
+    "Bihar": "#db3a31",
+    "Chhattisgarh": "#ef5a56",
     "Goa": "#1ABC9C",
-    "Gujarat": "#E74C3C",
-    "Haryana": "#F39C12",
+    "Gujarat": "#bd3030",
+    "Haryana": "#85cb8e",
     "Himachal Pradesh": "#8E44AD",
-    "Jharkhand": "#3498DB",
-    "Karnataka": "#E67E22",
+    "Jharkhand": "#f9ff3f",
+    "Jammu and Kashmir": "#feb918",
+    "Karnataka": "#bb5701",
     "Kerala": "#2ECC71",
-    "Madhya Pradesh": "#D35400",
-    "Maharashtra": "#C0392B",
-    "Manipur": "#2980B9",
+    "Ladakh": "#85cb8e",
+    "Madhya Pradesh": "#8b4fc1",
+    "Maharashtra": "#cac452",
+    "Manipur": "#e7f900",
     "Meghalaya": "#8E44AD",
     "Mizoram": "#9B59B6",
     "Nagaland": "#F1C40F",
-    "Odisha": "#34495E",
-    "Punjab": "#DFFF00",
-    "Rajasthan": "#C70039",
-    "Sikkim": "#581845",
-    "Tamil Nadu": "#FF5733",
-    "Telangana": "#33FF57",
+    "Odisha": "#6fd85b",
+    "Punjab": "#a361e0",
+    "Rajasthan": "#e2ee21",
+    "Sikkim": "#e7f900",
+    "Tamil Nadu": "#58d067",
+    "Telangana": "#9355d0",
     "Tripura": "#3357FF",
-    "Uttar Pradesh": "#F4D03F",
-    "Uttarakhand": "#9B59B6",
-    "West Bengal": "#1ABC9C",
+    "Uttar Pradesh": "#fea300",
+    "Uttarakhand": "#bd3030",
+    "West Bengal": "#965ac6",
 };
 
 // Capitals' locations
@@ -68,15 +70,6 @@ const capitals = [
     { state: "Uttarakhand", capital: "Dehradun", coords: [30.3165, 78.0322] },
     { state: "West Bengal", capital: "Kolkata", coords: [22.5726, 88.3639] },
 ];
-
-// Custom tooltip for displaying state names
-const StateLabel: React.FC<{ state: string; position: [number, number] }> = ({ state, position }) => {
-    return (
-        <Tooltip position={position} permanent>
-            <strong>{state}</strong>
-        </Tooltip>
-    );
-};
 
 const RevisedMap: React.FC = () => {
     const [data, setData] = useState<any | null>(null);
@@ -209,13 +202,13 @@ const RevisedMap: React.FC = () => {
             </MapContainer>
 
             {/* Show the state info box */}
-            {infoVisible && (
+            {/* {infoVisible && (
                 <StateInfo
                     stateName={hoveredState}
                     info="Additional state information shown here."
                     onClose={onCloseInfo}
                 />
-            )}
+            )} */}
         </div>
     );
 };
