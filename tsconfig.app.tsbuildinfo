@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/pages/hero.tsx","./src/components/navs/lefticoncontent.tsx","./src/components/states/state.tsx","./src/components/states/stateinfo.tsx","./src/components/map/map.tsx"],"errors":true,"version":"5.6.3"}
