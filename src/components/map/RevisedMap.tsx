@@ -87,7 +87,7 @@ const RevisedMap: React.FC = () => {
     const defaultStyle = {
         weight: 1,
         opacity: 1,
-        color: 'white',
+        color: 'gray',
         fillOpacity: 1.0,
     };
 
@@ -99,7 +99,7 @@ const RevisedMap: React.FC = () => {
 
         if (stateName === hoveredState) {
             return {
-                fillColor: '#FFA500',
+                // fillColor: '#FFA500',
                 weight: 2,
                 opacity: 1,
                 color: 'black',
@@ -109,11 +109,12 @@ const RevisedMap: React.FC = () => {
 
         if (hoveredZone !== null && zone === hoveredZone) {
             return {
-                fillColor: '#FFD700',
+                // fillColor: '#FFD700',
                 weight: 1,
                 opacity: 1,
-                color: 'black',
+                color: '#FFF',
                 fillOpacity: 1.0,
+
             };
         }
 
@@ -124,16 +125,51 @@ const RevisedMap: React.FC = () => {
     };
 
     const onStateHover = (event: any) => {
-        const { properties } = event.target.feature;
+        const layer = event.target;
+        const { properties } = layer.feature;
+
+        // Set the hovered state and zone
         setHoveredState(properties.st_nm);
         setHoveredZone(properties.zones);
-        // setInfoVisible(true);
+
+        // Apply the "protrusion" effect by increasing the scale and adding a shadow
+        layer.setStyle({
+            weight: 3, // Increase border weight
+            color: '#000000', // Change border color
+            fillOpacity: 1.0, // Make the state more solid
+
+        });
+
+        // Add CSS transform effect by manipulating the state layer's element directly
+        if (layer._path) {
+            layer._path.classList.add('state-hover-3d');
+        }
     };
 
-    const onStateMouseOut = () => {
+    const onStateMouseOut = (event: any) => {
+        const layer = event.target;
+
+        // Reset the hovered state and zone
         setHoveredState(null);
         setHoveredZone(null);
+
+        // Reset the layer's style to its default
+        layer.setStyle({
+            weight: 1,
+            color: 'white',
+            fillOpacity: 1.0,
+        });
+
+        // Remove the transform effect
+        if (layer._path) {
+            layer._path.classList.remove('state-hover-3d');
+
+
+            // layer._path.style.transform = 'none'; // Reset transform
+            // layer._path.style.zIndex = ''; // Reset z-index
+        }
     };
+
 
     // const onCloseInfo = () => {
     //     setInfoVisible(false);
@@ -167,7 +203,7 @@ const RevisedMap: React.FC = () => {
 
         //Label position for each state
         layer.bindTooltip(stateName, { permanent: true, direction: 'center' }).openTooltip();
-        layer.setStyle({ fillOpacity: 0.7 });
+        layer.setStyle({ fillOpacity: 1.0 });
         layer.on({
             click: () => {
                 window.location.href = `https://example.com/${stateName.replace(/\s+/g, '-').toLowerCase()}`; // Redirect to the specific state's page
@@ -176,7 +212,7 @@ const RevisedMap: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-full z-10">
+        <div className="h-screen w-full z-10 map-container-3d">
             <MapContainer center={[20.5937, 78.9629]} zoom={5} className="h-full w-full" zoomControl={false} attributionControl={false}>
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
