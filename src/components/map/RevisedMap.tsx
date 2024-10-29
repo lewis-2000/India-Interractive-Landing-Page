@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { Map } from 'leaflet'; //Map type from Leaflet
+
 import 'leaflet/dist/leaflet.css';
 import Zones from '../info/Zones';
 import States from '../info/States';
 
-// Define a color mapping for the states
 const stateColors: { [key: string]: string } = {
     "Andhra Pradesh": "#FF5733",
     "Arunachal Pradesh": "#e7f900",
@@ -39,14 +40,49 @@ const stateColors: { [key: string]: string } = {
     "West Bengal": "#965ac6",
 };
 
+// Zone URLs based on the state's name mapping
+const stateUrls: { [key: string]: string } = {
+    "Andhra Pradesh": "https://example.com/AndhraPradesh",
+    "Arunachal Pradesh": "https://example.com/ArunachalPradesh",
+    "Assam": "https://example.com/Assam",
+    "Bihar": "https://example.com/Bihar",
+    "Chhattisgarh": "https://example.com/Chhattisgarh",
+    "Goa": "https://example.com/Goa",
+    "Gujarat": "https://example.com/Gujarat",
+    "Haryana": "https://example.com/Haryana",
+    "Himachal Pradesh": "https://example.com/HimachalPradesh",
+    "Jharkhand": "https://example.com/Jharkhand",
+    "Jammu and Kashmir": "https://example.com/JammuAndKashmir",
+    "Karnataka": "https://example.com/Karnataka",
+    "Kerala": "https://example.com/Kerala",
+    "Ladakh": "https://example.com/Ladakh",
+    "Madhya Pradesh": "https://example.com/MadhyaPradesh",
+    "Maharashtra": "https://example.com/Maharashtra",
+    "Manipur": "https://example.com/Manipur",
+    "Meghalaya": "https://example.com/Meghalaya",
+    "Mizoram": "https://example.com/Mizoram",
+    "Nagaland": "https://example.com/Nagaland",
+    "Odisha": "https://example.com/Odisha",
+    "Punjab": "https://example.com/Punjab",
+    "Rajasthan": "https://example.com/Rajasthan",
+    "Sikkim": "https://example.com/Sikkim",
+    "Tamil Nadu": "https://example.com/TamilNadu",
+    "Telangana": "https://example.com/Telangana",
+    "Tripura": "https://example.com/Tripura",
+    "Uttar Pradesh": "https://example.com/UttarPradesh",
+    "Uttarakhand": "https://example.com/Uttarakhand",
+    "West Bengal": "https://example.com/WestBengal",
+};
+
 const RevisedMap: React.FC = () => {
     const [data, setData] = useState<any | null>(null);
     const [hoveredState, setHoveredState] = useState<string | null>(null);
     const [hoveredZone, setHoveredZone] = useState<number | null>(null);
     const [selectedState, setSelectedState] = useState<string | null>(null);
+    const mapRef = useRef<Map>(null);
+    // console.log(mapRef);
 
-    // console.log("Hovered Zone is : ", hoveredZone);
-    // console.log("Hovered State is : ", hoveredState);
+
 
     useEffect(() => {
         fetch('/India-Interractive-Landing-Page/india.geojson')
@@ -66,7 +102,7 @@ const RevisedMap: React.FC = () => {
         const stateName = feature.properties.st_nm;
         const zone = feature.properties.zones;
 
-        const fillColor = stateColors[stateName] || '#FFFFFF'; // Default to white if state is not in the map
+        const fillColor = stateColors[stateName] || '#FFFFFF';
 
         if (stateName === hoveredState || stateName === selectedState) {
             return {
@@ -112,7 +148,25 @@ const RevisedMap: React.FC = () => {
         layer.on({
             mouseover: onStateHover,
             mouseout: onStateMouseOut,
-            click: () => setSelectedState(feature.properties.st_nm),
+            click: () => {
+                setSelectedState(feature.properties.st_nm);
+                window.location.href = stateUrls[feature.properties.st_nm];
+
+                // Focus on the clicked state in the map
+                if (mapRef.current) {
+                    console.log("clicked state");
+                    const stateBounds = layer.getBounds();
+                    mapRef.current.fitBounds(stateBounds, { padding: [20, 20], maxZoom: 8 });
+                }
+            },
+        });
+
+        // Bind a tooltip to the layer to show the state name on hover
+        layer.bindTooltip(feature.properties.st_nm, {
+            permanent: false,
+            direction: "top",
+            opacity: 0.8,
+            className: "state-tooltip", // Add this class for custom styling if needed
         });
     };
 
@@ -138,7 +192,7 @@ const RevisedMap: React.FC = () => {
                 )}
             </MapContainer>
             <Zones selectedZone={hoveredZone} onZoneClick={handleZoneClick} />
-            <States stateColors={stateColors} onStateClick={handleStateClick} />
+            <States stateColors={stateColors} onStateClick={handleStateClick} hoveredState={hoveredState} />
         </div>
     );
 };
