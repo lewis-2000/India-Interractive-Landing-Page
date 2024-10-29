@@ -45,6 +45,9 @@ const RevisedMap: React.FC = () => {
     const [hoveredZone, setHoveredZone] = useState<number | null>(null);
     const [selectedState, setSelectedState] = useState<string | null>(null);
 
+    // console.log("Hovered Zone is : ", hoveredZone);
+    // console.log("Hovered State is : ", hoveredState);
+
     useEffect(() => {
         fetch('/India-Interractive-Landing-Page/india.geojson')
             .then((response) => response.json())

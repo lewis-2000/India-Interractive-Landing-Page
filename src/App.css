@@ -15,6 +15,7 @@
 /* styles.css */
 .map-container-3d {
   perspective: 800px; /* Distance from the viewer for the perspective effect */
+  background-color: #000;
 }
 
 .state-hover-3d {

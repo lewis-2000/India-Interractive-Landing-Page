@@ -3,7 +3,7 @@ import Navbar from "../components/Navs/LeftIconContent"
 import RevisedMap from "../components/map/RevisedMap"
 const Hero = () => {
     return (
-        <div className="bg-black">
+        <div className="bg-black overflow-hidden">
             <Navbar />
             {/* <MapComponent /> */}
             <RevisedMap />
