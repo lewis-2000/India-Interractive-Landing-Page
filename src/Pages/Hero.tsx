@@ -1,13 +1,14 @@
-import Navbar from "../components/Navs/LeftIconContent"
-// import MapComponent from "../components/map/Map"
-import RevisedMap from "../components/map/RevisedMap"
+// import Map from "../components/Map/MapComponent"
+import RevisedMap from "../components/Map/RevisedMap"
+import StateList from "../components/States/StateList"
+import Zones from "../components/Zones/Zones"
+
 const Hero = () => {
     return (
-        <div className="bg-black overflow-hidden">
-            <Navbar />
-            {/* <MapComponent /> */}
+        <div className="h-full w-full">
             <RevisedMap />
-
+            <StateList />
+            <Zones />
         </div>
     )
 }
