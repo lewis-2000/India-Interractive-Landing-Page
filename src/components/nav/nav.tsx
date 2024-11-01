@@ -29,7 +29,7 @@ const NavBar = () => {
 
             {/* Fly-out Menu */}
             <div
-                className={`fixed inset-0 bg-gray-950 text-white transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                className={`fixed inset-0 bg-gray-950/5 backdrop-blur-md text-white transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
                     } transition-transform duration-300 ease-in-out z-50`}
             >
                 {/* Close Button */}
@@ -47,9 +47,17 @@ const NavBar = () => {
                 <ul className="flex flex-col space-y-4 mt-10 text-lg overflow-y-auto h-[80%] px-4">
                     {indianStates.map((state) => (
                         <li key={state.name}>
-                            <span style={{ color: state.color }}>{state.name}</span> -
-                            <a href={state.url} target="_blank" rel="noopener noreferrer">Visit</a> -
-                            Capital: {state.capital.name} ({state.capital.coordinates[0]}, {state.capital.coordinates[1]})
+                            <a href={state.url} target="_blank" rel="noopener noreferrer">
+                                <span
+                                    className="inline-block w-3 h-3 rounded-full mr-2"
+                                    style={{ backgroundColor: state.color }}
+                                ></span>
+
+                                {/* <span style={{ color: state.color }}>{state.name}</span> */}
+                                <span style={{ color: "white" }}>{state.name}</span>
+
+
+                            </a>
                         </li>
                     ))}
                 </ul>
