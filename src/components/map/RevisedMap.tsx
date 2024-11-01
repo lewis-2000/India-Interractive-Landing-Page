@@ -22,8 +22,11 @@ const RevisedMap = () => {
 
     // Tile layer options for optimization
     const tileLayerOptions = {
-        maxZoom: 18,
+        maxZoom: 5,
         minZoom: 3,
+        updateWhenZooming: false, // Prevents unnecessary tile updates while zooming
+        updateWhenIdle: true, // Only update when the map stops moving
+        keepBuffer: 3, // Pre-fetch tiles within three zoom levels beyond the view
     };
 
     // Style for GeoJSON states
@@ -61,19 +64,19 @@ const RevisedMap = () => {
 
 
 
-    const focusOnState = (layer: any) => {
-        if (mapRef.current) {
-            // console.log("Focusing on clicked state", mapRef.current);
-            const stateBounds = layer.getBounds();
-            // console.log("State Bounds:", stateBounds);
+    // const focusOnState = (layer: any) => {
+    //     if (mapRef.current) {
+    //         // console.log("Focusing on clicked state", mapRef.current);
+    //         const stateBounds = layer.getBounds();
+    //         // console.log("State Bounds:", stateBounds);
 
-            mapRef.current.fitBounds(stateBounds, { padding: [5, 5], maxZoom: 5 });
-            // mapRef.current.setView(stateBounds, 5);
+    //         mapRef.current.fitBounds(stateBounds, { padding: [5, 5], maxZoom: 5 });
+    //         // mapRef.current.setView(stateBounds, 5);
 
-        } else {
-            console.log("Map reference is not available");
-        }
-    };
+    //     } else {
+    //         console.log("Map reference is not available");
+    //     }
+    // };
 
 
     const onEachFeature = (feature: any, layer: any) => {
