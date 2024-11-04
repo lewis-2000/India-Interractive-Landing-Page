@@ -26,7 +26,7 @@ const Zones = () => {
 
     return (
         <div
-            className="absolute bottom-0 left-0 p-2 w-full md:w-[20%] bg-gray-900 shadow-lg md:h-auto md:m-2"
+            className="absolute bottom-0 left-0 p-2 w-full md:w-[20%] md:h-auto md:m-2"
             style={{ zIndex: 700 }}
         >
             <div className="flex md:flex-col flex-row justify-between overflow-auto md:overflow-visible">
@@ -34,9 +34,9 @@ const Zones = () => {
                     <button
                         key={zone}
                         id={`${zone}`}
-                        className={`flex-1 mb-0 md:mb-2 mx-1 md:mx-0 px-2 py-1 font-bold text-white rounded transition-colors ${hoveredZone === zone
-                            ? "bg-orange-500"
-                            : "bg-gray-800 hover:bg-gray-700"
+                        className={`flex-1 mb-0 md:mb-2 mx-1 md:mx-0 px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 font-bold rounded-md text-white transition-transform transform ${hoveredZone === zone
+                                ? "bg-orange-500"
+                                : "bg-transparent border-2 border-gray-700 hover:bg-gray-700"
                             }`}
                         style={{ flexBasis: "16.5%" }}
                         onClick={() => handleZoneClick(zone)}
@@ -47,6 +47,7 @@ const Zones = () => {
                 ))}
             </div>
         </div>
+
     );
 };
 

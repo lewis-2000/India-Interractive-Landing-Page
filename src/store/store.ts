@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import geoJsonReducer from './geoJsonSlice';
+// import geoJsonReducer from './geoJsonSlice';
 import interactionReducer from './interactionSlice';
 import statisticsReducer from './statisticsSlice';
 import viewportReducer from './viewportSlice';
@@ -8,7 +8,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 const store = configureStore({
   reducer: {
-    geoJson: geoJsonReducer,
+    // geoJson: geoJsonReducer,
     interaction: interactionReducer,
     statistics: statisticsReducer,
     viewport: viewportReducer,

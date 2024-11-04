@@ -20,6 +20,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.state-tooltip-hover {
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.75); /* Dark background for dark mode */
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  z-index: 700;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 12px;

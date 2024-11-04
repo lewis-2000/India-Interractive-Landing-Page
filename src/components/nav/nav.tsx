@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi'; // Using react-icons for menu and close icons
-import { useAppSelector } from '../../store/store';
+import { useAppSelector, useAppDispatch } from '../../store/store';
+import { setStateHover } from '../../store/interactionSlice';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useAppDispatch();
+    // const state = useAppSelector((state) => state.stateSlice);
     const indianStates = useAppSelector((state) => state.stateSlice);
 
     const toggleMenu = () => {
@@ -46,8 +49,12 @@ const NavBar = () => {
                 {/* Menu Items */}
                 <ul className="flex flex-col space-y-4 mt-10 text-lg overflow-y-auto h-[80%] px-4">
                     {indianStates.map((state) => (
-                        <li key={state.name}>
-                            <a href={state.url} target="_blank" rel="noopener noreferrer">
+                        <li key={state.name} onClick={() => {
+                            setIsOpen(false);
+                            dispatch(setStateHover(state.name));
+
+                        }}>
+                            <a href={state.url} target="_blank" rel="noopener noreferrer" onClick={() => { setIsOpen(false) }}>
                                 <span
                                     className="inline-block w-3 h-3 rounded-full mr-2"
                                     style={{ backgroundColor: state.color }}

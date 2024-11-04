@@ -1,24 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Map } from 'leaflet';
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setStateHover, setStateClick, setZoneHover } from "../../store/interactionSlice";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 const RevisedMap = () => {
     const dispatch = useAppDispatch();
-    const geoData = useAppSelector((state) => state.geoJson.data); // Fetch GeoJSON from Redux
+    const [geoData, setGeoData] = useState(null);
     const IndianStates = useAppSelector((state) => state.stateSlice); // State color and metadata
     const hoveredState = useAppSelector((state) => state.interaction.stateHover);
     const zoneHover = useAppSelector((state) => state.interaction.zoneHover);
+    const isMobile = useAppSelector((state) => state.viewport.isMobile);
     const mapRef = useRef<Map | null>(null);
 
-    // console.log("Zone Hover : ", zoneHover);
+
+    console.log("Is mobile", isMobile);
+
+
+
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipText, setTooltipText] = useState('');
+    const [tooltipPosition, setTooltipPosition] = useState<[number, number] | null>(null);
+
+    const [zoomLevel, setZoomLevel] = useState(isMobile ? 4 : 5);
+
+
+    const handleTooltipOnHover = (state: any) => {
+        setTooltipText(state.name);
+        setTooltipPosition([state.capital.coordinates[0], state.capital.coordinates[1]]);
+        setTooltipVisible(true);
+        console.log("Tooltip Positions", tooltipPosition);
+        console.log("State Hovered Tooltip", state.name);
+    };
+
 
 
     // Map center coordinates (India)
-    const center: [number, number] = [20.5937, 78.9629];
+    const center: [number, number] = isMobile
+        ? [20.5937, 82.5]  // Shift longitude slightly left for mobile
+        : [20.5937, 78.9629]; // Default center for desktop
+
 
     // Tile layer options for optimization
     const tileLayerOptions = {
@@ -36,7 +60,7 @@ const RevisedMap = () => {
         const baseStyle = {
             fillColor: stateData ? stateData.color : "#ccc",
             weight: 1,
-            color: "#fff",
+            color: "#FCFCFC",
             fillOpacity: 1.0,
         };
 
@@ -61,29 +85,7 @@ const RevisedMap = () => {
         return baseStyle;
     };
 
-
-
-
-    // const focusOnState = (layer: any) => {
-    //     if (mapRef.current) {
-    //         // console.log("Focusing on clicked state", mapRef.current);
-    //         const stateBounds = layer.getBounds();
-    //         // console.log("State Bounds:", stateBounds);
-
-    //         mapRef.current.fitBounds(stateBounds, { padding: [5, 5], maxZoom: 5 });
-    //         // mapRef.current.setView(stateBounds, 5);
-
-    //     } else {
-    //         console.log("Map reference is not available");
-    //     }
-    // };
-
-
     const onEachFeature = (feature: any, layer: any) => {
-
-        // const zones = feature.properties.zones;
-        // console.log("ZoneLayer : ", feature.properties.zones);
-
         layer.bindTooltip(feature.properties.st_nm, {
             permanent: false, // Tooltip appears only on hover
             direction: 'top', // Position the tooltip above the state
@@ -91,22 +93,15 @@ const RevisedMap = () => {
             opacity: 0.9, // Adjust tooltip opacity
         });
 
-
-
-
         layer.on({
             mouseover: () => {
                 dispatch(setStateHover(feature.properties.st_nm));
                 dispatch(setZoneHover(feature.properties.zones));
 
-                // layer.setStyle({ weight: 5, color: '#000', fillOpacity: 1.0 });
                 if (layer._path) layer._path.classList.add('state-hover-3d');
                 layer.openTooltip(); // Show the tooltip
-                // focusOnState(layer); // Center the map on the clicked state
-
             },
             mouseout: () => {
-                // layer.setStyle({ weight: 1, color: 'white', fillOpacity: 1.0 });
                 dispatch(setStateHover(null));
                 dispatch(setZoneHover(null));
                 if (layer._path) layer._path.classList.remove('state-hover-3d');
@@ -114,29 +109,69 @@ const RevisedMap = () => {
             },
             click: () => {
                 dispatch(setStateClick(feature.properties.st_nm));
-
                 const stateData = IndianStates.find(state => state.name === feature.properties.st_nm);
-                // console.log("State Data", stateData);
                 const stateUrl = stateData?.url;
                 window.location.href = `https://example.com/${stateUrl}`;
             },
-
         });
-
     };
 
+    useEffect(() => {
+        const state = IndianStates.find((s) => s.name === hoveredState);
+        if (state) {
+            handleTooltipOnHover(state);
+            // console.log("Hovered state Positions: ", state.capital.coordinates[0]);
+        } else {
+            setTooltipVisible(false);
+        }
+    }, [hoveredState, IndianStates]);
 
-    // useEffect(() => {
-    //     if (hoveredState) {
-    //         console.log("UseEffect - Hovere on state: " + hoveredState);
-    //     }
-    // })
+    useEffect(() => {
+        const loadGeoJSON = async () => {
+            try {
+                const response = await fetch('/India-Interractive-Landing-Page/india.geojson');
+                const data = await response.json();
+                setGeoData(data);
+            } catch (error) {
+                console.error('Error loading GeoJSON data:', error);
+            }
+        };
+
+        loadGeoJSON();
+    }, []);
+
+    useEffect(() => {
+        // Adjust zoom level when `isMobile` changes
+        setZoomLevel(isMobile ? 4 : 5);
+
+        // Update the map zoom if mapRef is available
+        if (mapRef.current) {
+            mapRef.current.setZoom(zoomLevel);
+        }
+    }, [isMobile, zoomLevel]);
+
+    if (!geoData) {
+        return (
+            <div className="flex justify-center items-center h-screen w-full" style={{ zIndex: 700 }}>
+                <ThreeDots   // Type of spinner
+                    height="80"
+                    width="80"
+                    color="#4fa94d"
+                    ariaLabel="tail-spin-loading"
+                    radius="1"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        );
+    }
 
     return (
         <MapContainer
             ref={mapRef}
             center={center}
-            zoom={5}
+            zoom={zoomLevel}
             scrollWheelZoom={false}
             style={{ height: "100vh", width: "100%", backgroundColor: "#333" }}
             zoomControl={false}
@@ -147,9 +182,14 @@ const RevisedMap = () => {
                 attribution='&copy; OpenStreetMap & CARTO'
                 {...tileLayerOptions}
             />
-            {/* Load GeoJSON with defined styles and event handlers */}
             {geoData && (
                 <GeoJSON data={geoData} style={style} onEachFeature={onEachFeature} />
+            )}
+
+            {tooltipVisible && tooltipPosition && (
+                <Tooltip position={tooltipPosition} className="state-tooltip z-50" permanent={false} direction="top">
+                    <span>{tooltipText}</span>
+                </Tooltip>
             )}
         </MapContainer>
     );
