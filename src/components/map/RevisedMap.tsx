@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
+import { GeoJSON as LeafletGeoJSON, Map } from 'leaflet';
 import "leaflet/dist/leaflet.css";
-import { Map } from 'leaflet';
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setStateHover, setStateClick, setZoneHover } from "../../store/interactionSlice";
 import { useEffect, useRef, useState } from "react";
@@ -14,11 +14,9 @@ const RevisedMap = () => {
     const hoveredState = useAppSelector((state) => state.interaction.stateHover);
     const zoneHover = useAppSelector((state) => state.interaction.zoneHover);
     const isMobile = useAppSelector((state) => state.viewport.isMobile);
-    const mapRef = useRef<Map | null>(null);
 
-
-    console.log("Is mobile", isMobile);
-
+    const globalMap = useRef<Map | null>(null);
+    const mapRef = useRef<LeafletGeoJSON>(null);
 
 
     const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -98,14 +96,14 @@ const RevisedMap = () => {
                 dispatch(setStateHover(feature.properties.st_nm));
                 dispatch(setZoneHover(feature.properties.zones));
 
-                if (layer._path) layer._path.classList.add('state-hover-3d');
-                layer.openTooltip(); // Show the tooltip
+                // if (layer._path) layer._path.classList.add('state-hover-3d');
+                // layer.openTooltip(); // Show the tooltip
             },
             mouseout: () => {
                 dispatch(setStateHover(null));
                 dispatch(setZoneHover(null));
-                if (layer._path) layer._path.classList.remove('state-hover-3d');
-                layer.closeTooltip(); // Hide the tooltip
+                // if (layer._path) layer._path.classList.remove('state-hover-3d');
+                // layer.closeTooltip(); // Hide the tooltip
             },
             click: () => {
                 dispatch(setStateClick(feature.properties.st_nm));
@@ -114,18 +112,46 @@ const RevisedMap = () => {
                 window.location.href = `https://example.com/${stateUrl}`;
             },
         });
+
+        if (hoveredState) {
+            layer.openTooltip();
+            if (layer._path) layer._path.classList.add('state-hover-3d');
+            console.log("Updated hover");
+        }
     };
 
     useEffect(() => {
         const state = IndianStates.find((s) => s.name === hoveredState);
+        const layers = mapRef.current?.getLayers();
+
+        // Ensure tooltips are only shown for states, not districts
+        layers?.forEach((layer: any) => {
+            if (layer.feature.properties.st_nm === hoveredState && !layer.feature.properties.district) {
+                layer.bindTooltip(hoveredState, {
+                    permanent: false,
+                    direction: 'top',
+                    className: 'state-tooltip',
+                    offset: [0, 0],
+                }).openTooltip();
+
+                if (layer._path) layer._path.classList.add('state-hover-3d');
+
+            } else {
+                layer.closeTooltip();
+                if (layer._path) layer._path.classList.remove('state-hover-3d');
+
+            }
+        });
+
         if (state) {
             handleTooltipOnHover(state);
-            // console.log("Hovered state Positions: ", state.capital.coordinates[0]);
         } else {
             setTooltipVisible(false);
         }
     }, [hoveredState, IndianStates]);
 
+
+    //Load GeoJSON file
     useEffect(() => {
         const loadGeoJSON = async () => {
             try {
@@ -140,16 +166,18 @@ const RevisedMap = () => {
         loadGeoJSON();
     }, []);
 
+    //Check vieport size
     useEffect(() => {
         // Adjust zoom level when `isMobile` changes
         setZoomLevel(isMobile ? 4 : 5);
 
         // Update the map zoom if mapRef is available
-        if (mapRef.current) {
-            mapRef.current.setZoom(zoomLevel);
+        if (globalMap.current) {
+            globalMap.current.setZoom(zoomLevel);
         }
     }, [isMobile, zoomLevel]);
 
+    //Map and custom Map SVG Load watcher
     if (!geoData) {
         return (
             <div className="flex justify-center items-center h-screen w-full" style={{ zIndex: 700 }}>
@@ -169,7 +197,7 @@ const RevisedMap = () => {
 
     return (
         <MapContainer
-            ref={mapRef}
+            ref={globalMap}
             center={center}
             zoom={zoomLevel}
             scrollWheelZoom={false}
@@ -183,7 +211,8 @@ const RevisedMap = () => {
                 {...tileLayerOptions}
             />
             {geoData && (
-                <GeoJSON data={geoData} style={style} onEachFeature={onEachFeature} />
+                <GeoJSON data={geoData} style={style} onEachFeature={onEachFeature} ref={mapRef}
+                />
             )}
 
             {tooltipVisible && tooltipPosition && (
