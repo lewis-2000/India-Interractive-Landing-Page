@@ -36,7 +36,8 @@ const NavBar = () => {
                     } transition-transform duration-300 ease-in-out z-50`}
             >
                 {/* Close Button */}
-                <div className="flex justify-end p-4">
+                <div className="flex justify-between p-4">
+                    <h1 className='text-white text-lg'>State List</h1>
                     <button
                         className="text-3xl"
                         onClick={toggleMenu}

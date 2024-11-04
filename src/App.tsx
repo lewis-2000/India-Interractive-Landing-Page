@@ -2,6 +2,7 @@ import './App.css'
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './store/store';
 import { setMobileView } from './store/viewportSlice';
+import { loadStatesFromFile } from './store/stateSlice';
 
 import NavBar from './components/nav/nav';
 import Hero from './Pages/Hero';
@@ -27,6 +28,10 @@ function App() {
 
     // Cleanup event listener on component unmount
     return () => window.removeEventListener('resize', updateMobileView);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(loadStatesFromFile());
   }, [dispatch]);
 
   return (
