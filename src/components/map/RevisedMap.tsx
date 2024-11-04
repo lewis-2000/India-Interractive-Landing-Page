@@ -13,6 +13,7 @@ const RevisedMap = () => {
     const IndianStates = useAppSelector((state) => state.stateSlice); // State color and metadata
     const hoveredState = useAppSelector((state) => state.interaction.stateHover);
     const zoneHover = useAppSelector((state) => state.interaction.zoneHover);
+    const zones = useAppSelector((state) => state.zonesSlice);
     const isMobile = useAppSelector((state) => state.viewport.isMobile);
 
     const globalMap = useRef<Map | null>(null);
@@ -30,8 +31,8 @@ const RevisedMap = () => {
         setTooltipText(state.name);
         setTooltipPosition([state.capital.coordinates[0], state.capital.coordinates[1]]);
         setTooltipVisible(true);
-        console.log("Tooltip Positions", tooltipPosition);
-        console.log("State Hovered Tooltip", state.name);
+        // console.log("Tooltip Positions", tooltipPosition);
+        // console.log("State Hovered Tooltip", state.name);
     };
 
 
@@ -71,11 +72,14 @@ const RevisedMap = () => {
             };
         }
 
-        if (zoneHover !== null && feature.properties.zones === zoneHover) {
+        if (zoneHover !== null && stateData?.zone === zoneHover) {
+            const zoneData = zones.find(z => z.zone === zoneHover);
+            // console.log("Highlighted zone color", zoneData ? zoneData.highlightColor : 'undefined');
+
             return {
                 ...baseStyle,
                 weight: 3,
-                color: '#333',
+                color: zoneData ? zoneData.highlightColor : '#333', // Use the highlight color
                 fillOpacity: 1.0,
             };
         }
@@ -116,7 +120,7 @@ const RevisedMap = () => {
         if (hoveredState) {
             layer.openTooltip();
             if (layer._path) layer._path.classList.add('state-hover-3d');
-            console.log("Updated hover");
+            // console.log("Updated hover");
         }
     };
 

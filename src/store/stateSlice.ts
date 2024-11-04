@@ -13,12 +13,13 @@ interface State {
     color: string;
     url: string;
     capital: Capital;
+    zone: number;
 }
 
 // Define the initial state
 const initialState: State[] = [];
 
-//State slice
+// Create the slice
 const statesSlice = createSlice({
     name: 'states',
     initialState,
@@ -28,14 +29,15 @@ const statesSlice = createSlice({
         },
         updateState: (
             state, 
-            action: PayloadAction<{ name: string; color?: string; url?: string; capital?: Capital }>
+            action: PayloadAction<{ name: string; color?: string; url?: string; capital?: Capital; zone?: number }>
         ) => {
-            const { name, color, url, capital } = action.payload;
+            const { name, color, url, capital, zone } = action.payload;
             const existingState = state.find(s => s.name === name);
             if (existingState) {
                 if (color) existingState.color = color;
                 if (url) existingState.url = url;
                 if (capital) existingState.capital = capital;
+                if (zone !== undefined) existingState.zone = zone; // Ensure zone is only updated if provided
             }
         },
     },
@@ -44,8 +46,8 @@ const statesSlice = createSlice({
 export const { setStates, updateState } = statesSlice.actions;
 export default statesSlice.reducer;
 
-// Load states from JSON file
-export const loadStatesFromFile = () => async (dispatch:any) => {
+// Thunk to load states from JSON file
+export const loadStatesFromFile = () => async (dispatch: any) => {
     try {
         const response = await axios.get('/India-Interractive-Landing-Page/statesData.json');
         dispatch(setStates(response.data));

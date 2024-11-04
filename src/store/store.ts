@@ -4,6 +4,7 @@ import interactionReducer from './interactionSlice';
 import statisticsReducer from './statisticsSlice';
 import viewportReducer from './viewportSlice';
 import stateSlice from './stateSlice';
+import zonesSlice from './zonesSlice';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
     statistics: statisticsReducer,
     viewport: viewportReducer,
     stateSlice: stateSlice,
+    zonesSlice: zonesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
