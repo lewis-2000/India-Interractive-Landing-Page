@@ -1,0 +1,32 @@
+[
+    {
+        "zone": 1,
+        "url": "https://example.com/zone-1",
+        "highlightColor": "#333"
+    },
+    {
+        "zone": 2,
+        "url": "https://example.com/zone-2",
+        "highlightColor": "#333"
+    },
+    {
+        "zone": 3,
+        "url": "https://example.com/zone-3",
+        "highlightColor": "#333"
+    },
+    {
+        "zone": 4,
+        "url": "https://example.com/zone-4",
+        "highlightColor": "#333"
+    },
+    {
+        "zone": 5,
+        "url": "https://example.com/zone-5",
+        "highlightColor": "#333"
+    },
+    {
+        "zone": 6,
+        "url": "https://example.com/zone-6",
+        "highlightColor": "#333"
+    }
+]
