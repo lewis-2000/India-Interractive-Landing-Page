@@ -27,7 +27,7 @@ const Zones = () => {
                     <button
                         key={zone.zone}
                         id={`${zone.zone}`}
-                        className={`flex-1 mb-0 md:mb-2 mx-1 md:mx-0 px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 font-bold rounded-md text-white transition-transform transform ${hoveredZone === zone.zone
+                        className={`flex-1 mb-0 md:mb-1 mx-1 md:mx-0 px-2 py-1 md:px-3 md:py-2 lg:px-4 lg:py-2 font-bold rounded-md text-white transition-transform transform ${hoveredZone === zone.zone
                             ? "bg-orange-500"
                             : "bg-transparent border-2 border-gray-700 hover:bg-gray-700"
                             }`}

@@ -3,7 +3,7 @@
         "name": "Andhra Pradesh",
         "color": "#FF5733",
         "url": "https://example.com/AndhraPradesh",
-        "zone": 4,
+        "zone": 9,
         "capital": {
             "name": "Amaravati",
             "coordinates": [
@@ -16,7 +16,7 @@
         "name": "Arunachal Pradesh",
         "color": "#e7f900",
         "url": "https://example.com/ArunachalPradesh",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Itanagar",
             "coordinates": [
@@ -29,7 +29,7 @@
         "name": "Assam",
         "color": "#fe9e0c",
         "url": "https://example.com/Assam",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Dispur",
             "coordinates": [
@@ -42,7 +42,7 @@
         "name": "Bihar",
         "color": "#db3a31",
         "url": "https://example.com/Bihar",
-        "zone": 2,
+        "zone": 6,
         "capital": {
             "name": "Patna",
             "coordinates": [
@@ -55,7 +55,7 @@
         "name": "Chhattisgarh",
         "color": "#ef5a56",
         "url": "https://example.com/Chhattisgarh",
-        "zone": 5,
+        "zone": 4,
         "capital": {
             "name": "Raipur",
             "coordinates": [
@@ -65,10 +65,23 @@
         }
     },
     {
+        "name": "Daman and Diu",
+        "color": "#F5DEB3",
+        "url": "https://example.com/Daman and Diu",
+        "zone": 3,
+        "capital": {
+            "name": "Daman",
+            "coordinates": [
+                72.8397,
+                20.4278
+            ]
+        }
+    },
+    {
         "name": "Goa",
         "color": "#1ABC9C",
         "url": "https://example.com/Goa",
-        "zone": 3,
+        "zone": 5,
         "capital": {
             "name": "Panaji",
             "coordinates": [
@@ -94,7 +107,7 @@
         "name": "Haryana",
         "color": "#85cb8e",
         "url": "https://example.com/Haryana",
-        "zone": 1,
+        "zone": 2,
         "capital": {
             "name": "Chandigarh",
             "coordinates": [
@@ -120,7 +133,7 @@
         "name": "Jharkhand",
         "color": "#f9ff3f",
         "url": "https://example.com/Jharkhand",
-        "zone": 2,
+        "zone": 6,
         "capital": {
             "name": "Ranchi",
             "coordinates": [
@@ -146,7 +159,7 @@
         "name": "Karnataka",
         "color": "#bb5701",
         "url": "https://example.com/Karnataka",
-        "zone": 4,
+        "zone": 9,
         "capital": {
             "name": "Bengaluru",
             "coordinates": [
@@ -159,7 +172,7 @@
         "name": "Kerala",
         "color": "#2ECC71",
         "url": "https://example.com/Kerala",
-        "zone": 4,
+        "zone": 10,
         "capital": {
             "name": "Thiruvananthapuram",
             "coordinates": [
@@ -185,7 +198,7 @@
         "name": "Madhya Pradesh",
         "color": "#8b4fc1",
         "url": "https://example.com/MadhyaPradesh",
-        "zone": 5,
+        "zone": 4,
         "capital": {
             "name": "Bhopal",
             "coordinates": [
@@ -198,7 +211,7 @@
         "name": "Maharashtra",
         "color": "#cac452",
         "url": "https://example.com/Maharashtra",
-        "zone": 3,
+        "zone": 5,
         "capital": {
             "name": "Mumbai",
             "coordinates": [
@@ -211,7 +224,7 @@
         "name": "Manipur",
         "color": "#e7f900",
         "url": "https://example.com/Manipur",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Imphal",
             "coordinates": [
@@ -224,7 +237,7 @@
         "name": "Meghalaya",
         "color": "#8E44AD",
         "url": "https://example.com/Meghalaya",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Shillong",
             "coordinates": [
@@ -237,7 +250,7 @@
         "name": "Mizoram",
         "color": "#9B59B6",
         "url": "https://example.com/Mizoram",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Aizawl",
             "coordinates": [
@@ -250,7 +263,7 @@
         "name": "Nagaland",
         "color": "#F1C40F",
         "url": "https://example.com/Nagaland",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Kohima",
             "coordinates": [
@@ -263,7 +276,7 @@
         "name": "Odisha",
         "color": "#6fd85b",
         "url": "https://example.com/Odisha",
-        "zone": 2,
+        "zone": 7,
         "capital": {
             "name": "Bhubaneswar",
             "coordinates": [
@@ -276,7 +289,7 @@
         "name": "Punjab",
         "color": "#a361e0",
         "url": "https://example.com/Punjab",
-        "zone": 1,
+        "zone": 2,
         "capital": {
             "name": "Chandigarh",
             "coordinates": [
@@ -315,7 +328,7 @@
         "name": "Tamil Nadu",
         "color": "#58d067",
         "url": "https://example.com/TamilNadu",
-        "zone": 4,
+        "zone": 10,
         "capital": {
             "name": "Chennai",
             "coordinates": [
@@ -328,7 +341,7 @@
         "name": "Telangana",
         "color": "#9355d0",
         "url": "https://example.com/Telangana",
-        "zone": 4,
+        "zone": 9,
         "capital": {
             "name": "Hyderabad",
             "coordinates": [
@@ -341,7 +354,7 @@
         "name": "Tripura",
         "color": "#3357FF",
         "url": "https://example.com/Tripura",
-        "zone": 6,
+        "zone": 8,
         "capital": {
             "name": "Agartala",
             "coordinates": [
@@ -354,7 +367,7 @@
         "name": "Uttar Pradesh",
         "color": "#fea300",
         "url": "https://example.com/UttarPradesh",
-        "zone": 5,
+        "zone": 6,
         "capital": {
             "name": "Lucknow",
             "coordinates": [
@@ -367,7 +380,7 @@
         "name": "Uttarakhand",
         "color": "#bd3030",
         "url": "https://example.com/Uttarakhand",
-        "zone": 1,
+        "zone": 2,
         "capital": {
             "name": "Dehradun",
             "coordinates": [
@@ -380,7 +393,7 @@
         "name": "West Bengal",
         "color": "#965ac6",
         "url": "https://example.com/WestBengal",
-        "zone": 2,
+        "zone": 7,
         "capital": {
             "name": "Kolkata",
             "coordinates": [

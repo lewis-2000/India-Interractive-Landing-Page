@@ -13,7 +13,7 @@ const RevisedMap = () => {
     const IndianStates = useAppSelector((state) => state.stateSlice); // State color and metadata
     const hoveredState = useAppSelector((state) => state.interaction.stateHover);
     const zoneHover = useAppSelector((state) => state.interaction.zoneHover);
-    const zones = useAppSelector((state) => state.zonesSlice);
+    const zonesData = useAppSelector((state) => state.zonesSlice);
     const isMobile = useAppSelector((state) => state.viewport.isMobile);
 
     const globalMap = useRef<Map | null>(null);
@@ -59,7 +59,7 @@ const RevisedMap = () => {
         const baseStyle = {
             fillColor: stateData ? stateData.color : "#ccc",
             weight: 1,
-            color: "#FCFCFC",
+            color: "",
             fillOpacity: 1.0,
         };
 
@@ -73,7 +73,7 @@ const RevisedMap = () => {
         }
 
         if (zoneHover !== null && stateData?.zone === zoneHover) {
-            const zoneData = zones.find(z => z.zone === zoneHover);
+            const zoneData = zonesData.find(z => z.zone === zoneHover);
             // console.log("Highlighted zone color", zoneData ? zoneData.highlightColor : 'undefined');
 
             return {
