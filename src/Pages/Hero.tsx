@@ -3,6 +3,7 @@ import RevisedMap from "../components/Map/RevisedMap";
 import StateList from "../components/States/StateList";
 import Zones from "../components/Zones/Zones";
 import InfoBanner from "../components/messages/InfoBanner";
+// import StateAccordion from '../components/messages/StateAccordion';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Set initial state based on window width
@@ -29,6 +30,7 @@ const Hero = () => {
             <RevisedMap />
             <StateList />
             <Zones />
+            {/* <StateAccordion /> */}
         </div>
     );
 };

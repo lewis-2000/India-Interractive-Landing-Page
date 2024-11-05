@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/store';
 import { setStateHover } from '../../store/interactionSlice';
-import { setZoneHover } from "../../store/interactionSlice";
+// import { setZoneHover } from "../../store/interactionSlice";
 
 
 const StateList: React.FC = () => {
@@ -22,8 +22,8 @@ const StateList: React.FC = () => {
 
     const handleHover = (stateName: string) => {
         dispatch(setStateHover(stateName));
-        const findZone = states.find(z => z?.name === stateName);
-        dispatch(setZoneHover(findZone?.zone));
+        // const findZone = states.find(z => z?.name === stateName);
+        // dispatch(setZoneHover(findZone?.zone));
     };
 
     // Scroll into view when hoveredState changes

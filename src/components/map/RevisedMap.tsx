@@ -40,7 +40,7 @@ const RevisedMap = () => {
     // Map center coordinates (India)
     const center: [number, number] = isMobile
         ? [16.5, 82.5]  // Shift longitude slightly left for mobile
-        : [20.5937, 78.9629]; // Default center for desktop
+        : [20.5937, 77.9629]; // Default center for desktop
 
 
     // Tile layer options for optimization
@@ -163,6 +163,7 @@ const RevisedMap = () => {
         layers?.forEach((layer: any) => {
             const stateName = layer.feature.properties.st_nm.trim();
             const stateData = IndianStates.find((state) => state.name === stateName);
+            // console.log("States in zone : ", stateData?.zone, stateData?.name);
 
             // Apply styling to all states in the hovered zone
             if (zoneHover !== null && stateData?.zone === zoneHover) {
