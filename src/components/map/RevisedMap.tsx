@@ -66,7 +66,7 @@ const RevisedMap = () => {
         if (hoveredState === stateName) {
             return {
                 ...baseStyle,
-                weight: 3,
+                weight: 2,
                 color: '#000',
                 fillOpacity: 1.0,
             };
@@ -88,6 +88,9 @@ const RevisedMap = () => {
     };
 
     const onEachFeature = (feature: any, layer: any) => {
+        const stateData = IndianStates.find((state) => state.name === feature.properties.st_nm);
+        // const zoneData = zonesData.find(z => z.zone === zoneHover);
+
         layer.bindTooltip(feature.properties.st_nm, {
             permanent: false, // Tooltip appears only on hover
             direction: 'top', // Position the tooltip above the state
@@ -98,16 +101,14 @@ const RevisedMap = () => {
         layer.on({
             mouseover: () => {
                 dispatch(setStateHover(feature.properties.st_nm));
-                dispatch(setZoneHover(feature.properties.zones));
+                dispatch(setZoneHover(stateData?.zone));
 
-                // if (layer._path) layer._path.classList.add('state-hover-3d');
-                // layer.openTooltip(); // Show the tooltip
+
             },
             mouseout: () => {
                 dispatch(setStateHover(null));
                 dispatch(setZoneHover(null));
-                // if (layer._path) layer._path.classList.remove('state-hover-3d');
-                // layer.closeTooltip(); // Hide the tooltip
+
             },
             click: () => {
                 dispatch(setStateClick(feature.properties.st_nm));

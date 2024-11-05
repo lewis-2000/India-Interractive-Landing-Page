@@ -18,7 +18,7 @@
 .zone-hover-3d {
   transform-style: preserve-3d;
   transform: scale(1) rotateX(10deg) translateY(7px); /* Lift the state up */
-  transition: transform 0.1s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
   /* z-index: 999; */
   box-shadow: 0px 20px 30px 30px rgb(255, 255, 255);
 }
