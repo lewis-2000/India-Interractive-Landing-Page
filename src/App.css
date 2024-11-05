@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.zones-container {
+  max-height: 20svh; /* Accounts for browser UI on mobile */
+}
+
 .state-hover-3d {
   transform-style: preserve-3d;
   transform: scale(1) rotateX(10deg) translateY(7px); /* Lift the state up */
@@ -28,6 +32,36 @@
   border-radius: 5px;
   font-size: 0.9rem;
   z-index: 700;
+}
+
+.toast-mobile {
+  margin: 10px;
+  width: auto;
+  max-width: 90%;
+}
+
+.toast-desktop {
+  margin: 0;
+  width: auto;
+  max-width: 280px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* Custom Scrollbars */

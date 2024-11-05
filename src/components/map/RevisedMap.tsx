@@ -39,7 +39,7 @@ const RevisedMap = () => {
 
     // Map center coordinates (India)
     const center: [number, number] = isMobile
-        ? [20.5937, 82.5]  // Shift longitude slightly left for mobile
+        ? [16.5, 82.5]  // Shift longitude slightly left for mobile
         : [20.5937, 78.9629]; // Default center for desktop
 
 
