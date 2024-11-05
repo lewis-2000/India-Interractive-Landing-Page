@@ -124,6 +124,7 @@ const RevisedMap = () => {
         }
     };
 
+    //Highlight states
     useEffect(() => {
         const state = IndianStates.find((s) => s.name === hoveredState);
         const layers = mapRef.current?.getLayers();
@@ -153,6 +154,23 @@ const RevisedMap = () => {
             setTooltipVisible(false);
         }
     }, [hoveredState, IndianStates]);
+
+    //Highlight zones
+    useEffect(() => {
+        const layers = mapRef.current?.getLayers();
+
+        layers?.forEach((layer: any) => {
+            const stateName = layer.feature.properties.st_nm.trim();
+            const stateData = IndianStates.find((state) => state.name === stateName);
+
+            // Apply styling to all states in the hovered zone
+            if (zoneHover !== null && stateData?.zone === zoneHover) {
+                if (layer._path) layer._path.classList.add('zone-hover-3d');
+            } else {
+                if (layer._path) layer._path.classList.remove('zone-hover-3d');
+            }
+        });
+    }, [zoneHover, IndianStates]);
 
 
     //Load GeoJSON file

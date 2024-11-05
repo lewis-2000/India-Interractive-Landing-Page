@@ -7,6 +7,9 @@ const Zones = () => {
     const hoveredZone = useAppSelector((state) => state.interaction.zoneHover || state.interaction.zoneClick);
     const zones = useAppSelector((state) => state.zonesSlice);
 
+    // const states = useAppSelector((state) => state.stateSlice);
+
+
     const handleZoneHover = (zone: number) => {
         dispatch(setZoneHover(zone));
     };
@@ -17,6 +20,7 @@ const Zones = () => {
             window.location.href = zoneData.url;
         }
     };
+
 
     return (
         <div

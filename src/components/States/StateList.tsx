@@ -9,8 +9,16 @@ const StateList: React.FC = () => {
     const hoveredState = useAppSelector((state) => state.interaction.stateHover);
     const states = useAppSelector((state) => state.stateSlice);
 
+    // const hoveredZone = useAppSelector((state) => state.zonesSlice);
+
+    // console.log("Statelist.tsx hovered state", hoveredState);
+    // console.log("Statelist.tsx hovered zone", hoveredZone);
+    // console.log("Statelist.tsx States : ", states);
+
+
     // Refs to store each state's list item
     const stateRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
+
 
     const handleHover = (stateName: string) => {
         dispatch(setStateHover(stateName));
