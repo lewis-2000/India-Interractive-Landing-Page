@@ -18,7 +18,7 @@ const NavBar = () => {
             {/* Logo and Text */}
             <div className="flex items-center space-x-3">
                 <img src="/India-Interractive-Landing-Page//IndiaFlag.png" alt="Logo" className="h-8" />
-                <span className="font-bold text-lg">India</span>
+                <span className="font-bold text-lg">IndiaTourBook</span>
             </div>
 
             {/* Menu Button for Mobile */}
