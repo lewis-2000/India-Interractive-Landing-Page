@@ -200,8 +200,8 @@ const MapComponent = () => {
                 onZoneClick(event); // Call the click function with the event
 
                 // Dispatch the clicked state or zone to Redux
-                dispatch(setStateClick(feature.properties.st_nm)); // Assuming state name is in properties.st_nm
-                dispatch(setZoneClick(feature.properties.st_nm)); // Assuming zones property exists
+                dispatch(setStateClick(feature.properties.st_nm));
+                dispatch(setZoneClick(feature.properties.st_nm));
             }
         });
     };

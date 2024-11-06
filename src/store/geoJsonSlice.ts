@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GeoJsonObject } from 'geojson'; // Import GeoJsonObject type
 
 interface GeoJSONState {
-  data: GeoJsonObject | null; // Change 'any' to 'GeoJsonObject'
+  data: GeoJsonObject | null; 
 }
 
 const initialState: GeoJSONState = {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi'; // Using react-icons for menu and close icons
+import { FiMenu, FiX } from 'react-icons/fi'; //react-icons for menu and close icons
 import { useAppSelector, useAppDispatch } from '../../store/store';
 import { setStateHover } from '../../store/interactionSlice';
 

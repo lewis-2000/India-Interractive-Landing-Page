@@ -18,7 +18,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // Disable serializable check for large data to improve performance in development
+      // Disables serializable check for large data to improve performance in development
       serializableCheck: {
         ignoredActions: ['geoJson/setGeoJSONData'], // Skip actions related to geoJson data
         ignoredPaths: ['geoJson.data'], // Skip checking the path where the large data is stored
