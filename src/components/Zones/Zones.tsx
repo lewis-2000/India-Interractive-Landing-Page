@@ -47,6 +47,7 @@ const Zones = () => {
                             style={{ flexBasis: "auto" }}
                             onClick={() => handleZoneClick(zone.zone)}
                             onMouseOver={() => handleZoneHover(zone.zone)}
+                            onMouseLeave={() => handleZoneHover(null)}
                         >
                             ZONE {zone.zone}
                         </button>
