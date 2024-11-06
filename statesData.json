@@ -78,6 +78,19 @@
         }
     },
     {
+        "name": "Delhi",
+        "color": "#ff0000",
+        "url": "https://example.com/Delhi",
+        "zone": 3,
+        "capital": {
+            "name": "New Delhi",
+            "coordinates": [
+                77.2314,
+                28.6139
+            ]
+        }
+    },
+    {
         "name": "Goa",
         "color": "#1ABC9C",
         "url": "https://example.com/Goa",
