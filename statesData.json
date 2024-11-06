@@ -81,7 +81,7 @@
         "name": "Delhi",
         "color": "#ff0000",
         "url": "https://example.com/Delhi",
-        "zone": 3,
+        "zone": 2,
         "capital": {
             "name": "New Delhi",
             "coordinates": [
