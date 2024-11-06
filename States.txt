@@ -28,3 +28,19 @@
     "Uttar Pradesh": "#fea300",
     "Uttarakhand": "#bd3030",
     "West Bengal": "#965ac6",
+
+
+
+    <li
+                            key={state.name}
+                            ref={(el) => (stateRefs.current[state.name] = el)}
+                            className={`flex items-center mb-2 pl-2 rounded-md cursor-pointer ${hoveredState === state.name ? 'bg-orange-500 text-black' : 'hover:bg-gray-800'
+                                }`}
+                            onMouseEnter={() => handleHover(state.name)}
+                        >
+                            <span
+                                className="inline-block w-3 h-3 rounded-full mr-2"
+                                style={{ backgroundColor: state.color }}
+                            ></span>
+                            {state.name}
+                        </li>

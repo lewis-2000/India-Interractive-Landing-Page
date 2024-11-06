@@ -88,7 +88,7 @@ const RevisedMap = () => {
     };
 
     const onEachFeature = (feature: any, layer: any) => {
-        const stateData = IndianStates.find((state) => state.name === feature.properties.st_nm);
+        // const stateData = IndianStates.find((state) => state.name === feature.properties.st_nm);
         // const zoneData = zonesData.find(z => z.zone === zoneHover);
 
         layer.bindTooltip(feature.properties.st_nm, {
@@ -101,13 +101,13 @@ const RevisedMap = () => {
         layer.on({
             mouseover: () => {
                 dispatch(setStateHover(feature.properties.st_nm));
-                dispatch(setZoneHover(stateData?.zone));
+                // dispatch(setZoneHover(stateData?.zone));
 
 
             },
             mouseout: () => {
                 dispatch(setStateHover(null));
-                dispatch(setZoneHover(null));
+                // dispatch(setZoneHover(null));
 
             },
             click: () => {
